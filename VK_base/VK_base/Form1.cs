@@ -12,7 +12,10 @@ using System.Xml;
 namespace WindowsFormsApplication1
 {
     public partial class Form1 : Form
-    {
+    { 
+        string access_token;
+        string user_id;
+
         public Form1()
         {
             InitializeComponent();
@@ -23,8 +26,7 @@ namespace WindowsFormsApplication1
             string url = e.Url.ToString();
             if (url.Contains("access_token"))
             {
-                string access_token;
-                string user_id;
+               
                 int index = url.IndexOf("access_token=");
                 int index2 = url.IndexOf("&expires_in");
                 access_token = url.Substring(index + 13, index2 - index - 13);
@@ -96,6 +98,8 @@ namespace WindowsFormsApplication1
         private void gropssercbaton_Click(object sender, EventArgs e)
         {
             Gropsserc serc = new Gropsserc();
+            serc.access_token = access_token;
+            serc.user_id = user_id;
             serc.ShowDialog();
         }
 

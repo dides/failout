@@ -108,5 +108,10 @@ namespace WindowsFormsApplication1
             AutoLike_form serc = new AutoLike_form();
             serc.ShowDialog();
         }
+
+        private void find_groups_box_TextChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }

@@ -6,6 +6,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using System.Xml;
 
 namespace WindowsFormsApplication1
 {
@@ -13,7 +14,7 @@ namespace WindowsFormsApplication1
     {
        public string access_token;
        public string user_id;
-         
+       string text;
         public Gropsserc()
         
             
@@ -24,9 +25,60 @@ namespace WindowsFormsApplication1
 
         private void Gropsserc_Load(object sender, EventArgs e)
         {
+            XmlDocument doc = new XmlDocument();
+            string request = "https://api.vk.com/method/users.get.xml?fields=photo_100&access_token=" + access_token + "&v=5.62";
+            doc.Load(request);
+            if (doc.InnerXml.Contains("error"))
+            {
+                MessageBox.Show("Ошибка получения данных о пользователе!");
+            }
+            foreach (XmlNode level1 in doc.SelectNodes("response"))
+            {
+                foreach (XmlNode level2 in level1.SelectNodes("user"))
+                {
+                    foreach (XmlNode level3 in level2.SelectNodes("first_name"))
+                    {
+                        label1.Text = level3.InnerText;
+                    }
+                    foreach (XmlNode level3 in level2.SelectNodes("last_name"))
+                    {
+                        label2.Text = level3.InnerText;
+                    }
+                    foreach (XmlNode level3 in level2.SelectNodes("photo_100"))
+                    {
+                        pictureBox1.ImageLocation = level3.InnerText;
+                    }
+                }
+            }
+           
+        }
 
-
+        private void checkedListBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
 
         }
+
+        private void textBox1_TextChanged(object sender, EventArgs e)
+        {
+            text = textBox1.Text;
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+
+            XmlDocument serh = new XmlDocument();
+            string ser = "https://api.vk.com/method/groups.search.xml?q=" + text + "&access_token=" + access_token + "&v=5.62";
+            ser = ser.Replace("#", "%23");
+            ser = ser.Replace(" ", "%20");
+            serh.Load(ser);
+            if (serh.InnerXml.Contains("error"))
+            {
+                MessageBox.Show("Ошибка получения данных о пользователе!");
+            }
+
+        }
+
+    
+        
     }
 }

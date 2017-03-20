@@ -75,6 +75,35 @@ namespace WindowsFormsApplication1
             {
                 MessageBox.Show("Ошибка получения данных о пользователе!");
             }
+            foreach (XmlNode level1 in serh.SelectNodes("response"))
+            {
+                listView1.Items.Clear();
+                foreach (XmlNode level2 in level1.SelectNodes("items"))
+                {
+                    foreach (XmlNode level3 in level2.SelectNodes("group"))
+                    {
+                        string name = "";
+                        foreach (XmlNode level4 in level3.SelectNodes("id"))
+                        {
+                            name = name +""+ level4.InnerText;
+                        }
+                        foreach (XmlNode level4 in level3.SelectNodes("name"))
+                        {
+                            name = level4.InnerText;
+                        }
+                        foreach (XmlNode level4 in level3.SelectNodes("photo_50"))
+                        {
+                            pictureBox2.Load(level4.InnerText);
+                        }
+                        listView1.Items.Add(name,imageList1.Images.Count-1);
+                        imageList1.Images.Add(pictureBox2.Image);
+                        Application.DoEvents();
+
+                           
+                    }
+                    
+                }
+            }
 
         }
 

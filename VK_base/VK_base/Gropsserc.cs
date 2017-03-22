@@ -83,9 +83,10 @@ namespace WindowsFormsApplication1
                     foreach (XmlNode level3 in level2.SelectNodes("group"))
                     {
                         string name = "";
+                        string id = "";
                         foreach (XmlNode level4 in level3.SelectNodes("id"))
                         {
-                            name = name +""+ level4.InnerText;
+                            id = level4.InnerText;
                         }
                         foreach (XmlNode level4 in level3.SelectNodes("name"))
                         {
@@ -95,19 +96,15 @@ namespace WindowsFormsApplication1
                         {
                             pictureBox2.Load(level4.InnerText);
                         }
-                        listView1.Items.Add(name,imageList1.Images.Count-1);
+                        listView1.Items.Add(id,name,imageList1.Images.Count-1);
                         imageList1.Images.Add(pictureBox2.Image);
                         Application.DoEvents();
-
+                        //https://api.vk.com/method/groups.getMembers?group_id=" + id + "&access_token=" + access_token + "&v=5.62";
                            
                     }
                     
                 }
             }
-
-        }
-
-    
-        
+        }    
     }
 }

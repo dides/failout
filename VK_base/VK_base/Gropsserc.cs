@@ -84,27 +84,45 @@ namespace WindowsFormsApplication1
                     {
                         string name = "";
                         string id = "";
-                        foreach (XmlNode level4 in level3.SelectNodes("id"))
-                        {
-                            id = level4.InnerText;
-                        }
+                        string[] grup = new string[2];
                         foreach (XmlNode level4 in level3.SelectNodes("name"))
                         {
-                            name = level4.InnerText;
+                            grup[0] = level4.InnerText;
+                        }
+                        foreach (XmlNode level4 in level3.SelectNodes("id"))
+                        {
+                            grup[1] = level4.InnerText;
                         }
                         foreach (XmlNode level4 in level3.SelectNodes("photo_50"))
                         {
                             pictureBox2.Load(level4.InnerText);
                         }
-                        listView1.Items.Add(id,name,imageList1.Images.Count-1);
-                        imageList1.Images.Add(pictureBox2.Image);
+                       // listView1.Items.Add(id,name,imageList1.Images.Count-1);
+                       imageList1.Images.Add(pictureBox2.Image);
                         Application.DoEvents();
-                        //https://api.vk.com/method/groups.getMembers?group_id=" + id + "&access_token=" + access_token + "&v=5.62";
-                           
+                       
+                        ListViewItem grups = new ListViewItem(grup,imageList1.Images.Count - 1);
+                        listView1.Items.Add(grups);
                     }
                     
                 }
             }
+        }
+
+        private void listView1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            //label3.Text = listView1.SelectedItems[0].SubItems[1].Text;
+            //label4.Text = listView1.SelectedItems[0].SubItems[0].Text;
+            
+            if (listView1.SelectedItems.Count > 0)
+            {
+                XmlDocument ser = new XmlDocument();
+                string groupsmembers = "https://api.vk.com/method/groups.getMembers.xml?group_id=" + listView1.SelectedItems[0].SubItems[1].Text + "&access_token=" + access_token + "&v=5.62";
+                ser.Load(groupsmembers);
+
+                
+            }
+            
         }    
     }
 }

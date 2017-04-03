@@ -95,10 +95,10 @@ namespace WindowsFormsApplication1
                         }
                         foreach (XmlNode level4 in level3.SelectNodes("photo_50"))
                         {
-                            pictureBox2.Load(level4.InnerText);
+                           // pictureBox2.Load(level4.InnerText);
                         }
                        // listView1.Items.Add(id,name,imageList1.Images.Count-1);
-                       imageList1.Images.Add(pictureBox2.Image);
+                       //imageList1.Images.Add(pictureBox2.Image);
                         Application.DoEvents();
                        
                         ListViewItem grups = new ListViewItem(grup,imageList1.Images.Count - 1);
@@ -111,15 +111,48 @@ namespace WindowsFormsApplication1
 
         private void listView1_SelectedIndexChanged(object sender, EventArgs e)
         {
-            //label3.Text = listView1.SelectedItems[0].SubItems[1].Text;
-            //label4.Text = listView1.SelectedItems[0].SubItems[0].Text;
+            //listView1.SelectedItems[0].SubItems[1].Text, 
+            //listView1.SelectedItems[0].SubItems[0].Text
+           //listView3 = listView1.SelectedItems[0].SubItems[1].Text;
+           //listView3.Items.Add(listView1.SelectedItems[0].SubItems[0].Text, listView1.SelectedItems[0].SubItems[1].Text); //listView1.SelectedItems[0].SubItems[0].Text;
             
             if (listView1.SelectedItems.Count > 0)
             {
+                listView3.Items.Add(listView1.SelectedItems[0].SubItems[0].Text, listView1.SelectedItems[0].SubItems[1].Text); //listView1.SelectedItems[0].SubItems[0].Text;
                 XmlDocument ser = new XmlDocument();
                 string groupsmembers = "https://api.vk.com/method/groups.getMembers.xml?group_id=" + listView1.SelectedItems[0].SubItems[1].Text + "&access_token=" + access_token + "&v=5.62";
                 ser.Load(groupsmembers);
+               
 
+                foreach (XmlNode level1 in ser.SelectNodes("response"))
+                {
+                    listView2.Items.Clear();
+                    foreach (XmlNode level2 in level1.SelectNodes("items"))
+                    {
+                        string name = "";
+                        string id = "";
+
+                        foreach (XmlNode level3 in level2.SelectNodes("uid"))
+                        {
+                            id = level3.InnerText;
+                           
+                            // listView1.Items.Add(id,name,imageList1.Images.Count-1);
+                           // imageList1.Images.Add(pictureBox2.Image);
+                           // Application.DoEvents();
+
+                            ListViewItem grups = new ListViewItem(id);
+                            listView2.Items.Add(id);
+
+                            if (listView1.SelectedItems[0].SubItems[1].Text == id)
+                            {
+
+                            }
+                            
+                        }
+
+                    }
+                }
+                
                 
             }
             

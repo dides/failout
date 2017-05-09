@@ -10,17 +10,20 @@ using System.Xml;
 
 namespace WindowsFormsApplication1
 {
+   
     public partial class Gropsserc : Form
     {
        public string access_token;
        public string user_id;
        string text;
         public Gropsserc()
-        
+       
             
         {
-            
+             
             InitializeComponent();
+            //string[] grup = new string[2];
+            
         }
 
         private void Gropsserc_Load(object sender, EventArgs e)
@@ -120,7 +123,8 @@ namespace WindowsFormsApplication1
             {
                 listView3.Items.Add(listView1.SelectedItems[0].SubItems[0].Text, listView1.SelectedItems[0].SubItems[1].Text); //listView1.SelectedItems[0].SubItems[0].Text;
                 XmlDocument ser = new XmlDocument();
-                string groupsmembers = "https://api.vk.com/method/groups.getMembers.xml?group_id=" + listView1.SelectedItems[0].SubItems[1].Text + "&access_token=" + access_token + "&v=5.62";
+                string groupsmembers = "https://api.vk.com/method/groups.getMembers.xml?user_id=" + user_id + "&access_token=" + "&fields=photo_100,first_name,last_name" + access_token + "&group_id=" + grup + "&v=5.62"; 
+foreach (XmlNode ud in ser.SelectNodes("response")) 
                 ser.Load(groupsmembers);
                
 

@@ -13,6 +13,7 @@ namespace WindowsFormsApplication1
    
     public partial class Gropsserc : Form
     {
+        public string[] grup = new string[2];
        public string access_token;
        public string user_id;
        string text;
@@ -22,7 +23,7 @@ namespace WindowsFormsApplication1
         {
              
             InitializeComponent();
-            //string[] grup = new string[2];
+            
             
         }
 
@@ -87,7 +88,7 @@ namespace WindowsFormsApplication1
                     {
                         string name = "";
                         string id = "";
-                        string[] grup = new string[2];
+                        
                         foreach (XmlNode level4 in level3.SelectNodes("name"))
                         {
                             grup[0] = level4.InnerText;
@@ -123,7 +124,7 @@ namespace WindowsFormsApplication1
             {
                 listView3.Items.Add(listView1.SelectedItems[0].SubItems[0].Text, listView1.SelectedItems[0].SubItems[1].Text); //listView1.SelectedItems[0].SubItems[0].Text;
                 XmlDocument ser = new XmlDocument();
-                string groupsmembers = "https://api.vk.com/method/groups.getMembers.xml?user_id=" + user_id + "&access_token=" + "&fields=photo_100,first_name,last_name" + access_token + "&group_id=" + grup + "&v=5.62"; 
+                string groupsmembers = "https://api.vk.com/method/groups.getMembers.xml?user_id=" + user_id + "&access_token=" + "&fields=photo_100,first_name,last_name" + access_token + "&group_id=" + grup[1] + "&v=5.62"; 
 foreach (XmlNode ud in ser.SelectNodes("response")) 
                 ser.Load(groupsmembers);
                

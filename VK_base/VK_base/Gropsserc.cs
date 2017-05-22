@@ -99,10 +99,10 @@ namespace WindowsFormsApplication1
                         }
                         foreach (XmlNode level4 in level3.SelectNodes("photo_50"))
                         {
-                           // pictureBox2.Load(level4.InnerText);
+                            pictureBox2.Load(level4.InnerText);
                         }
-                       // listView1.Items.Add(id,name,imageList1.Images.Count-1);
-                       //imageList1.Images.Add(pictureBox2.Image);
+                       listView1.Items.Add(id,name,imageList1.Images.Count-1);
+                       imageList1.Images.Add(pictureBox2.Image);
                         Application.DoEvents();
                        
                         ListViewItem grups = new ListViewItem(grup,imageList1.Images.Count - 1);
@@ -115,23 +115,24 @@ namespace WindowsFormsApplication1
 
         private void listView1_SelectedIndexChanged(object sender, EventArgs e)
         {
-            //listView1.SelectedItems[0].SubItems[1].Text, 
-            //listView1.SelectedItems[0].SubItems[0].Text
+           // listView1.SelectedItems[0].SubItems[1].Text; 
+            //listView1.SelectedItems[0].SubItems[0].Text;
            //listView3 = listView1.SelectedItems[0].SubItems[1].Text;
-           //listView3.Items.Add(listView1.SelectedItems[0].SubItems[0].Text, listView1.SelectedItems[0].SubItems[1].Text); //listView1.SelectedItems[0].SubItems[0].Text;
+          // listView3.Items.Add(listView1.SelectedItems[0].SubItems[0].Text, listView1.SelectedItems[0].SubItems[1].Text); //listView1.SelectedItems[0].SubItems[0].Text;
             
             if (listView1.SelectedItems.Count > 0)
             {
-                listView3.Items.Add(listView1.SelectedItems[0].SubItems[0].Text, listView1.SelectedItems[0].SubItems[1].Text); //listView1.SelectedItems[0].SubItems[0].Text;
+                listView3.Items.Add(listView1.SelectedItems[0].SubItems[0].Text, listView1.SelectedItems[0].SubItems[0].Text); //listView1.SelectedItems[0].SubItems[0].Text;
                 XmlDocument ser = new XmlDocument();
                 string groupsmembers = "https://api.vk.com/method/groups.getMembers.xml?user_id=" + user_id + "&access_token=" + "&fields=photo_100,first_name,last_name" + access_token + "&group_id=" + grup[1] + "&v=5.62"; 
 //foreach (XmlNode ud in ser.SelectNodes("response")) 
                 ser.Load(groupsmembers);
+                //listView1.SelectedItems.Count = listView1.SelectedItems.Count + 1;
                
 
                 foreach (XmlNode level1 in ser.SelectNodes("response"))
                 {
-                    listView2.Items.Clear();
+                    //listView2.Items.Clear();
                     foreach (XmlNode level2 in level1.SelectNodes("items"))
                     {
                         string name = "";
@@ -156,18 +157,22 @@ namespace WindowsFormsApplication1
                         }
                         foreach (XmlNode level4 in level3.SelectNodes("photo_100"))
                         {
- 
+                            pictureBox2.Load(level4.InnerText);
                         }
-                            ListViewItem grups = new ListViewItem(name,id);
+                        listView2.Items.Add(id, name, imageList2.Images.Count - 1);
+                        imageList2.Images.Add(pictureBox2.Image);
+                        Application.DoEvents();
+                        ListViewItem grups = new ListViewItem(name,id);
+                        
+                           // Application.DoEvents();
                             
-                            
-                            listView2.Items.Add(grups);
+                            //listView2.Items.Add(grups);
 
-                            if (listView1.SelectedItems[0].SubItems[1].Text == id)
+                            foreach (ListViewItem item in listView2.Items)
                             {
-
+                              string filter = "https://api.vk.com/method/groups.groups.isMember.xml?group_id" + grup[1] + "&user_id=" + user_id + "&v=5.62";
                             }
-                            
+                           
                         }
 
                     }

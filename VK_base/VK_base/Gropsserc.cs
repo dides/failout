@@ -115,6 +115,7 @@ namespace WindowsFormsApplication1
 
         private void listView1_SelectedIndexChanged(object sender, EventArgs e)
         {
+            
            // listView1.SelectedItems[0].SubItems[1].Text; 
             //listView1.SelectedItems[0].SubItems[0].Text;
            //listView3 = listView1.SelectedItems[0].SubItems[1].Text;
@@ -159,19 +160,37 @@ namespace WindowsFormsApplication1
                         {
                             pictureBox2.Load(level4.InnerText);
                         }
-                        listView2.Items.Add(id, name, imageList2.Images.Count - 1);
+
+                        ListViewItem itemY = new ListViewItem(name,imageList2.Images.Count - 1);
+                        itemY.SubItems[0] = new ListViewItem.ListViewSubItem(itemY,id);
+
+                        listView2.Items.Add(itemY );
                         imageList2.Images.Add(pictureBox2.Image);
                         Application.DoEvents();
-                        ListViewItem grups = new ListViewItem(name,id);
+                       // ListViewItem grups = new ListViewItem(name,id
+                            
                         
                            // Application.DoEvents();
                             
                             //listView2.Items.Add(grups);
-
+                             
                             foreach (ListViewItem item in listView2.Items)
                             {
-                              string filter = "https://api.vk.com/method/groups.groups.isMember.xml?group_id" + grup[1] + "&user_id=" + user_id + "&v=5.62";
+                                string filters1;
+                                XmlDocument filters = new XmlDocument();
+                                string filter = "https://api.vk.com/method/groups.isMember.xml?group_id=" + grup[1] + "&access_token=" + access_token + "&user_id=" + id + "&v=5.62";
+                              filters.Load(filter);
+                              foreach (XmlNode felter1 in filters.SelectNodes("response"))
+                              {
+                                  filters1 = felter1.InnerText;
+                                  if (filters1 == "1")
+                                  {
+ 
+                                  }
+                              }
                             }
+                            
+
                            
                         }
 

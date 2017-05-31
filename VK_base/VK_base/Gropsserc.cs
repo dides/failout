@@ -13,6 +13,7 @@ namespace WindowsFormsApplication1
    
     public partial class Gropsserc : Form
     {
+       public string[] items = new string[4];
         public string[] grup = new string[2];
        public string access_token;
        public string user_id;
@@ -88,7 +89,6 @@ namespace WindowsFormsApplication1
                     {
                         string name = "";
                         string id = "";
-                        
                         foreach (XmlNode level4 in level3.SelectNodes("name"))
                         {
                             grup[0] = level4.InnerText;
@@ -104,23 +104,22 @@ namespace WindowsFormsApplication1
                        listView1.Items.Add(id,name,imageList1.Images.Count-1);
                        imageList1.Images.Add(pictureBox2.Image);
                         Application.DoEvents();
-                       
                         ListViewItem grups = new ListViewItem(grup,imageList1.Images.Count - 1);
                         listView1.Items.Add(grups);
                     }
-                    
+
                 }
             }
         }
 
         private void listView1_SelectedIndexChanged(object sender, EventArgs e)
         {
-            
+
            // listView1.SelectedItems[0].SubItems[1].Text; 
             //listView1.SelectedItems[0].SubItems[0].Text;
            //listView3 = listView1.SelectedItems[0].SubItems[1].Text;
           // listView3.Items.Add(listView1.SelectedItems[0].SubItems[0].Text, listView1.SelectedItems[0].SubItems[1].Text); //listView1.SelectedItems[0].SubItems[0].Text;
-            
+
             if (listView1.SelectedItems.Count > 0)
             {
                 listView3.Items.Add(listView1.SelectedItems[0].SubItems[0].Text, listView1.SelectedItems[0].SubItems[0].Text); //listView1.SelectedItems[0].SubItems[0].Text;
@@ -129,7 +128,6 @@ namespace WindowsFormsApplication1
 //foreach (XmlNode ud in ser.SelectNodes("response")) 
                 ser.Load(groupsmembers);
                 //listView1.SelectedItems.Count = listView1.SelectedItems.Count + 1;
-               
 
                 foreach (XmlNode level1 in ser.SelectNodes("response"))
                 {
@@ -142,26 +140,25 @@ namespace WindowsFormsApplication1
                         {
                         foreach (XmlNode level4 in level3.SelectNodes("id"))
                         {
-                            id = level4.InnerText;
-                           
+                            items[2] = level4.InnerText;
                             // listView1.Items.Add(id,name,imageList1.Images.Count-1);
                             //imageList1.Images.Add(pictureBox2.Image);
                            //Application.DoEvents();
                         }
                         foreach(XmlNode level4 in level3.SelectNodes("first_name"))
                         {
-                            name = level4.InnerText;
+                            items[0] = level4.InnerText;
                         }
                         foreach (XmlNode level4 in level3.SelectNodes("last_name"))
                         {
-                            name = name + level4.InnerText;
+                            items[1] = name + level4.InnerText;
                         }
                         foreach (XmlNode level4 in level3.SelectNodes("photo_100"))
                         {
                             pictureBox2.Load(level4.InnerText);
                         }
-
-                        ListViewItem itemY = new ListViewItem(name,imageList2.Images.Count - 1);
+                            
+                        ListViewItem itemY = new ListViewItem(items,imageList2.Images.Count - 1);
                         itemY.SubItems[0] = new ListViewItem.ListViewSubItem(itemY,id);
                         listView2.Items.Add(itemY);
                         
@@ -200,6 +197,11 @@ namespace WindowsFormsApplication1
                 
             }
             
+        }
+
+        private void listView4_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
         }    
     }
 }

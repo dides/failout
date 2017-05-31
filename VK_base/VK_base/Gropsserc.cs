@@ -163,8 +163,8 @@ namespace WindowsFormsApplication1
 
                         ListViewItem itemY = new ListViewItem(name,imageList2.Images.Count - 1);
                         itemY.SubItems[0] = new ListViewItem.ListViewSubItem(itemY,id);
-
-                        listView2.Items.Add(itemY );
+                        listView2.Items.Add(itemY);
+                        
                         imageList2.Images.Add(pictureBox2.Image);
                         Application.DoEvents();
                        // ListViewItem grups = new ListViewItem(name,id
@@ -183,9 +183,9 @@ namespace WindowsFormsApplication1
                               foreach (XmlNode felter1 in filters.SelectNodes("response"))
                               {
                                   filters1 = felter1.InnerText;
-                                  if (filters1 == "1")
+                                  if (filters1 == "0")
                                   {
- 
+                                      listView2.Items.Remove(itemY);
                                   }
                               }
                             }

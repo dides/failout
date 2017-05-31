@@ -130,7 +130,7 @@
             // listView2
             // 
             this.listView2.LargeImageList = this.imageList2;
-            this.listView2.Location = new System.Drawing.Point(796, 99);
+            this.listView2.Location = new System.Drawing.Point(796, 92);
             this.listView2.Name = "listView2";
             this.listView2.Size = new System.Drawing.Size(147, 247);
             this.listView2.TabIndex = 10;

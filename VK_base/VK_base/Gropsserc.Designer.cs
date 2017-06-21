@@ -45,7 +45,6 @@
             this.label5 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
-            this.listView4 = new System.Windows.Forms.ListView();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             this.SuspendLayout();
@@ -133,14 +132,14 @@
             this.listView2.LargeImageList = this.imageList2;
             this.listView2.Location = new System.Drawing.Point(796, 92);
             this.listView2.Name = "listView2";
-            this.listView2.Size = new System.Drawing.Size(147, 118);
+            this.listView2.Size = new System.Drawing.Size(147, 254);
             this.listView2.TabIndex = 10;
             this.listView2.UseCompatibleStateImageBehavior = false;
             // 
             // imageList2
             // 
             this.imageList2.ColorDepth = System.Windows.Forms.ColorDepth.Depth8Bit;
-            this.imageList2.ImageSize = new System.Drawing.Size(16, 16);
+            this.imageList2.ImageSize = new System.Drawing.Size(32, 32);
             this.imageList2.TransparentColor = System.Drawing.Color.Transparent;
             // 
             // label3
@@ -198,21 +197,11 @@
             this.label7.TabIndex = 16;
             this.label7.Text = "Выбранные групы";
             // 
-            // listView4
-            // 
-            this.listView4.Location = new System.Drawing.Point(796, 216);
-            this.listView4.Name = "listView4";
-            this.listView4.Size = new System.Drawing.Size(147, 130);
-            this.listView4.TabIndex = 17;
-            this.listView4.UseCompatibleStateImageBehavior = false;
-            this.listView4.SelectedIndexChanged += new System.EventHandler(this.listView4_SelectedIndexChanged);
-            // 
             // Gropsserc
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(952, 371);
-            this.Controls.Add(this.listView4);
             this.Controls.Add(this.label7);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.label5);
@@ -255,6 +244,5 @@
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.ListView listView4;
     }
 }

@@ -101,7 +101,7 @@ namespace WindowsFormsApplication1
                         {
                             pictureBox2.Load(level4.InnerText);
                         }
-                       listView1.Items.Add(id,name,imageList1.Images.Count-1);
+                       //listView1.Items.Add(id,name,imageList1.Images.Count-1);
                        imageList1.Images.Add(pictureBox2.Image);
                         Application.DoEvents();
                         ListViewItem grups = new ListViewItem(grup,imageList1.Images.Count - 1);
@@ -157,13 +157,32 @@ namespace WindowsFormsApplication1
                         {
                             pictureBox2.Load(level4.InnerText);
                         }
-                            
-                        ListViewItem itemY = new ListViewItem(items,imageList2.Images.Count - 1);
-                        itemY.SubItems[0] = new ListViewItem.ListViewSubItem(itemY,id);
+                      
+                        if (listView3.Items.Count > 1)
+                        {
+                            foreach (ListViewItem item in listView2.Items)
+                            {
+                                string filters1;
+                                XmlDocument filters = new XmlDocument();
+                                string filter = "https://api.vk.com/method/groups.isMember.xml?group_id=" + grup[1] + "&access_token=" + access_token + "&user_id=" + items[2] + "&v=5.62";
+                                filters.Load(filter);
+                                foreach (XmlNode felter1 in filters.SelectNodes("response"))
+                                {
+                                    filters1 = felter1.InnerText;
+                                    if (filters1 == "0")
+                                    {
+                                        listView2.Items.Remove(item);
+                                    }
+                                }
+                            }
+                        }
+                        ListViewItem itemY = new ListViewItem(items,imageList2.Images.Count - 0);
+                       // itemY.SubItems[0] = new ListViewItem.ListViewSubItem(itemY,id);
                         listView2.Items.Add(itemY);
                         
                         imageList2.Images.Add(pictureBox2.Image);
                         Application.DoEvents();
+
                        // ListViewItem grups = new ListViewItem(name,id
                             
                         
@@ -171,21 +190,7 @@ namespace WindowsFormsApplication1
                             
                             //listView2.Items.Add(grups);
                              
-                            foreach (ListViewItem item in listView2.Items)
-                            {
-                                string filters1;
-                                XmlDocument filters = new XmlDocument();
-                                string filter = "https://api.vk.com/method/groups.isMember.xml?group_id=" + grup[1] + "&access_token=" + access_token + "&user_id=" + id + "&v=5.62";
-                              filters.Load(filter);
-                              foreach (XmlNode felter1 in filters.SelectNodes("response"))
-                              {
-                                  filters1 = felter1.InnerText;
-                                  if (filters1 == "0")
-                                  {
-                                      listView2.Items.Remove(itemY);
-                                  }
-                              }
-                            }
+                            
                             
 
                            
